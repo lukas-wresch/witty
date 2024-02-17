@@ -91,7 +91,7 @@ if (!$db->query(
 "CREATE TABLE `answers` ("
   ."`id` INTEGER PRIMARY KEY $autoincrement,"
   ."`text` TEXT NOT NULL,"
-  ."`is_correct` INTEGER"//1 if correct answer
+  ."`is-correct` INTEGER"//1 if correct answer
 .");"))
   die("Couldn't create table 'answer'");
 else
@@ -110,6 +110,7 @@ else
   echo "table 'session' created.<br/>";
 
 
+$g_status = ADMIN;//Give us admin access
 echo "Creating account 'wresch'.<br/>";
 CreateAccount("wresch@math.uni-bielefeld.de", "wresch", HashPassword("1234"), ADMIN);
 

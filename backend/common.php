@@ -18,16 +18,17 @@ define("ADMIN",           "3");
 session_start();
 
 if (isset($_SESSION['status']))
-	$g_status=$_SESSION['status'];
+	$g_status = $_SESSION['status'];
 
 if (isset($_SESSION['email']))
-	$g_email=$_SESSION['email'];
+	$g_email = $_SESSION['email'];
 
 if (isset($_SESSION['username']))
-	$g_username=$_SESSION['username'];
+	$g_username = $_SESSION['username'];
 
 if (isset($_SESSION['user_id']))
-	$g_user_id=$_SESSION['user_id'];
+	$g_user_id = $_SESSION['user_id'];
+
 
 
 function Connect2Database()
@@ -36,7 +37,7 @@ function Connect2Database()
 
 	if ($g_backend == "sqlite3")
 	{
-		$db = new SQLite3("database.db", SQLITE3_OPEN_READWRITE);
+		$db = new SQLite3($g_db_name, SQLITE3_OPEN_READWRITE);
 		$db->busyTimeout(5000);//Wait up to 5s if the datebase is locked
 		$db->exec('PRAGMA journal_mode = wal;');//Write ahead mode
 	}
@@ -146,7 +147,7 @@ function ResetResults($Results)
 
 
 
-function GetNoOfRows($Results)
+function GetNumOfRows($Results)
 {
 	$no = 0;
 
@@ -166,7 +167,7 @@ function GetLastRowID()
 	if ($g_backend == "sqlite3")
 		return sqlite3_last_insert_rowid($db);//DEPRECATED AND REMOVED
 	else if ($g_backend == "mysql")
-		mysql_insert_id($db);
+		return mysql_insert_id($db);
 	return NULL;
 }
 
